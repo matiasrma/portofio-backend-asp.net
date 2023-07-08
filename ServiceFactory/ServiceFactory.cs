@@ -31,6 +31,12 @@ namespace Service
 
             services.AddScoped<IAcercaDeRepositorio, AcercaDeRepositorio>();
             services.AddScoped<ILogicaAcercaDe, LogicaAcercaDe>();
+
+            services.AddScoped<IExperienciaRepositorio, ExperienciaRepositorio>();
+            services.AddScoped<ILogicaExperiencia, LogicaExperiencia>();
+
+            services.AddScoped<ISkillRepositorio, SkillRepositorio>();
+            services.AddScoped<ILogicaSkill, LogicaSkill>();
         }
     }
 }
