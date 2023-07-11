@@ -40,7 +40,7 @@ namespace AccesoADatos.Repositorio
                     if (!consulta.IsDBNull(0)) { usuario.email = consulta.GetString(0); }
                     if (!consulta.IsDBNull(1)) { usuario.nombre = consulta.GetString(1); }
                     if (!consulta.IsDBNull(2)) { usuario.nombre_usuario = consulta.GetString(2); }
-                    if (!consulta.IsDBNull(3)) { usuario.password = consulta.GetString(3); }
+                    //if (!consulta.IsDBNull(3)) { usuario.password = consulta.GetString(3); }
                 }
 
                 return usuario;

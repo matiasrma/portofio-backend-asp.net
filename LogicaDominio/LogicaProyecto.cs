@@ -6,26 +6,26 @@ using XSystem.Security.Cryptography;
 
 namespace LogicaDominio
 {
-    public class LogicaSkill : ILogicaSkill
+    public class LogicaProyecto : ILogicaProyecto
     {
-        private readonly ISkillRepositorio skillRepositorio;
+        private readonly IProyectoRepositorio skillRepositorio;
 
-        public LogicaSkill(ISkillRepositorio skillRepositorio)
+        public LogicaProyecto(IProyectoRepositorio skillRepositorio)
         {
             this.skillRepositorio = skillRepositorio;
         }
 
-        public List<Skill> ObtenerLista(int persona_id)
+        public List<Proyecto> ObtenerLista(int persona_id)
         {
             return this.skillRepositorio.ObtenerLista(persona_id);
         }
 
-        public void Guardar(List<Skill> lista)
+        public void Guardar(List<Proyecto> lista)
         {
             this.skillRepositorio.Guardar(lista);
         }
 
-        public void Eliminar(List<Skill> lista)
+        public void Eliminar(List<Proyecto> lista)
         {
             this.skillRepositorio.Eliminar(lista);
         }

@@ -1,6 +1,11 @@
 ﻿using Dominio;
 using ILogicaDominio;
 using InterfazAccesoADatos;
+using LogicaDominio.Common;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using XSystem.Security.Cryptography;
 
@@ -9,16 +14,25 @@ namespace LogicaDominio
     public class LogicaUsuario : ILogicaUsuario
     {
         private readonly IUsuarioRepositorio usuarioRepositorio;
+        private readonly AppSettings _appSettings;
 
-        public LogicaUsuario(IUsuarioRepositorio usuarioRepositorio)
+        public LogicaUsuario(IUsuarioRepositorio usuarioRepositorio, IOptions<AppSettings> appSettings)
         {
             this.usuarioRepositorio = usuarioRepositorio;
+            this._appSettings = appSettings.Value;
         }
 
         public Usuario Login(string nombre_usuario, string password)
         {
             password = GetMD5(password);
-            return this.usuarioRepositorio.Login(nombre_usuario, password);
+            Usuario usuario = this.usuarioRepositorio.Login(nombre_usuario, password);
+            
+            if(usuario.email != null)
+            {
+                usuario.token = GetToken(usuario);
+            }
+
+            return usuario;
         }
 
         public string GetMD5(string str)
@@ -32,6 +46,29 @@ namespace LogicaDominio
                 sb.Append(encoded[i].ToString("x2"));
 
             return sb.ToString();
+        }
+
+        private string GetToken(Usuario usuario)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(
+                    new Claim[]
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, usuario.nombre_usuario),
+                        new Claim(ClaimTypes.Email, usuario.email),
+                    }
+                    ),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
     }
 }

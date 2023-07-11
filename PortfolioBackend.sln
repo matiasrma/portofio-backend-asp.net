@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioBackend", "PortfolioBackend\PortfolioBackend.csproj", "{B888BB8D-8C1F-49A1-AEE8-2CF6D0896810}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioBackend", "PortfolioBackend\PortfolioBackend.csproj", "{B888BB8D-8C1F-49A1-AEE8-2CF6D0896810}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{CF0DE096-6AD7-4F34-A759-CE19BC3763E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio", "Dominio\Dominio.csproj", "{CF0DE096-6AD7-4F34-A759-CE19BC3763E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfazAccesoADatos", "InterfazAccesoADatos\InterfazAccesoADatos.csproj", "{04F8CE0A-1FDB-4D04-974C-E9C8C28421F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterfazAccesoADatos", "InterfazAccesoADatos\InterfazAccesoADatos.csproj", "{04F8CE0A-1FDB-4D04-974C-E9C8C28421F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILogicaDominio", "ILogicaDominio\ILogicaDominio.csproj", "{1765331E-9423-4007-8DB6-5001B7CFFEF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ILogicaDominio", "ILogicaDominio\ILogicaDominio.csproj", "{1765331E-9423-4007-8DB6-5001B7CFFEF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicaDominio", "LogicaDominio\LogicaDominio.csproj", "{E86A09CB-969F-494B-848C-09AC602AC36B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicaDominio", "LogicaDominio\LogicaDominio.csproj", "{E86A09CB-969F-494B-848C-09AC602AC36B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoADatos", "AccesoADatos\AccesoADatos.csproj", "{A4D8F6C4-0E22-4394-B9AA-7278C56F24BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccesoADatos", "AccesoADatos\AccesoADatos.csproj", "{A4D8F6C4-0E22-4394-B9AA-7278C56F24BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excepciones", "Excepciones\Excepciones.csproj", "{E5031CB6-0C21-45C0-86D7-3C96B9A59066}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Excepciones", "Excepciones\Excepciones.csproj", "{E5031CB6-0C21-45C0-86D7-3C96B9A59066}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "ServiceFactory\Service.csproj", "{B41EAAC5-7B87-4DC7-8F79-B9422965846B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "ServiceFactory\Service.csproj", "{B41EAAC5-7B87-4DC7-8F79-B9422965846B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

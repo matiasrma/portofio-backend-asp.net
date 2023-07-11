@@ -7,22 +7,22 @@ namespace PortfolioBackend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ExperienciaController : ControllerBase
+    public class ProyectoController : ControllerBase
     {
-        private readonly ILogicaExperiencia logicaExperiencia;
-        public ExperienciaController(ILogicaExperiencia _logicaExperiencia)
+        private readonly ILogicaProyecto logicaProyecto;
+        public ProyectoController(ILogicaProyecto _logicaProyecto)
         {
-            this.logicaExperiencia= _logicaExperiencia;
+            this.logicaProyecto= _logicaProyecto;
         }
 
         [HttpGet]
-        public ActionResult Experiencia(int persona_id)
+        public ActionResult Proyecto(int persona_id)
         {
-            List<Experiencia> lista = new List<Experiencia>();
+            List<Proyecto> lista = new List<Proyecto>();
 
             try
             {
-                lista = this.logicaExperiencia.ObtenerLista(persona_id);
+                lista = this.logicaProyecto.ObtenerLista(persona_id);
             }
             catch (Exception e)
             {
@@ -31,5 +31,6 @@ namespace PortfolioBackend.Controllers
 
             return StatusCode(200, JsonConvert.SerializeObject(lista));
         }
+
     }
 }

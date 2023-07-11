@@ -10,27 +10,26 @@ using System.Threading.Tasks;
 
 namespace AccesoADatos.Repositorio
 {
-    public class SkillRepositorio : ISkillRepositorio
+    public class ProyectoRepositorio : IProyectoRepositorio
     {
         private readonly IConexionDB conexionDB;
         private readonly MySqlConnection conexion;
 
-        public SkillRepositorio(IConexionDB _conexionDB)
+        public ProyectoRepositorio(IConexionDB _conexionDB)
         {
             this.conexionDB = _conexionDB;
             this.conexion = this.conexionDB.Open();
         }
 
-        public List<Skill> ObtenerLista(int persona_id)
+        public List<Proyecto> ObtenerLista(int persona_id)
         {
             string cadena = "SELECT \n" +
-                "id, \n" +
-                "img_skill, \n" +
-                "nombre_skill, \n" +
-                "percentage_skill, \n" +
-                "show_img, \n" +
+                "id, \n" +                
+                "descripcion_proyecto, \n" +
+                "nombre_proyecto, \n" +
+                "url_proyecto, \n" +
                 "persona_id \n" +
-                "FROM skill \n" +
+                "FROM proyecto \n" +
                 "WHERE persona_id = @persona_id;";
 
             try
@@ -39,20 +38,19 @@ namespace AccesoADatos.Repositorio
                 comando.Parameters.Add("@persona_id", MySqlDbType.String).Value = persona_id;
                 MySqlDataReader consulta = comando.ExecuteReader();
 
-                List<Skill> lista = new List<Skill>();
+                List<Proyecto> lista = new List<Proyecto>();
 
                 while (consulta.Read())
                 {
-                    Skill skill = new Skill();
+                    Proyecto proyecto = new Proyecto();
 
-                    if (!consulta.IsDBNull(0)) { skill.Id = consulta.GetInt32(0); }
-                    if (!consulta.IsDBNull(1)) { skill.img_skill = consulta.GetString(1); }
-                    if (!consulta.IsDBNull(2)) { skill.nombre_skill = consulta.GetString(2); }
-                    if (!consulta.IsDBNull(3)) { skill.percentage_skill = consulta.GetInt32(3); }
-                    if (!consulta.IsDBNull(4)) { skill.show_img = consulta.GetByte(4); }
-                    if (!consulta.IsDBNull(5)) { skill.persona_id = consulta.GetInt32(5); }
+                    if (!consulta.IsDBNull(0)) { proyecto.Id = consulta.GetInt32(0); }
+                    if (!consulta.IsDBNull(1)) { proyecto.descripcion_proyecto = consulta.GetString(1); }
+                    if (!consulta.IsDBNull(2)) { proyecto.nombre_proyecto = consulta.GetString(2); }
+                    if (!consulta.IsDBNull(3)) { proyecto.url_proyecto = consulta.GetString(3); }
+                    if (!consulta.IsDBNull(4)) { proyecto.persona_id = consulta.GetInt32(4); }
 
-                    lista.Add(skill);
+                    lista.Add(proyecto);
                 }
 
                 conexion.Close();
@@ -67,25 +65,23 @@ namespace AccesoADatos.Repositorio
 
         }
 
-        public void Guardar(List<Skill> lista)
+        public void Guardar(List<Proyecto> lista)
         {
-            string cadena = "INSERT INTO skill (\n" +
+            string cadena = "INSERT INTO proyecto (\n" +
                 "id, \n" +
-                "img_skill, \n" +
-                "nombre_skill, \n" +
-                "percentage_skill, \n" +
-                "show_img, \n" +
+                "descripcion_proyecto, \n" +
+                "nombre_proyecto, \n" +
+                "url_proyecto, \n" +
                 "persona_id \n" +
                 ") VALUES \n";
 
-            lista.ForEach(skill =>
+            lista.ForEach(proyecto =>
             {
                 cadena += "('" +
-                skill.Id + "', \n'" +
-                skill.img_skill + "', \n'" +
-                skill.nombre_skill + "', \n'" +
-                skill.percentage_skill + "', \n" +
-                skill.show_img + ", \n" +
+                proyecto.Id + "', \n'" +
+                proyecto.descripcion_proyecto + "', \n'" +
+                proyecto.nombre_proyecto + "', \n'" +
+                proyecto.url_proyecto + "', \n'" +
                 "@persona_id), \n";
             });
 
@@ -93,11 +89,10 @@ namespace AccesoADatos.Repositorio
 
             cadena +=
                 " ON DUPLICATE KEY UPDATE \n" +
-                "id = VALUES (id), \n" +
-                "img_skill = VALUES (img_skill), \n" +
-                "nombre_skill = VALUES (nombre_skill), \n" +
-                "percentage_skill = VALUES (percentage_skill), \n" +
-                "show_img = VALUES (show_img), \n" +
+                "Id = VALUES (Id), \n" +
+                "descripcion_proyecto = VALUES (descripcion_proyecto), \n" +
+                "nombre_proyecto = VALUES (nombre_proyecto), \n" +
+                "url_proyecto = VALUES (url_proyecto), \n" +
                 "persona_id = VALUES (persona_id);";
 
             try
@@ -117,13 +112,13 @@ namespace AccesoADatos.Repositorio
 
         }
 
-        public void Eliminar(List<Skill> lista)
+        public void Eliminar(List<Proyecto> lista)
         {            
-            string cadena = "DELETE FROM skill WHERE id IN ('";
+            string cadena = "DELETE FROM proyecto WHERE id IN ('";
 
-            lista.ForEach(skill =>
+            lista.ForEach(proyecto =>
             {
-                cadena += skill.Id + "', '";
+                cadena += proyecto.Id + "', '";
             });
 
             cadena = cadena.Substring(0, cadena.Length - 3) + ") ";

@@ -32,34 +32,5 @@ namespace PortfolioBackend.Controllers
             return StatusCode(200, JsonConvert.SerializeObject(lista));
         }
 
-        [HttpPost]
-        public ActionResult Guardar(Skill skill)
-        {
-            try
-            {
-                this.logicaSkill.Guardar(skill);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-
-            return StatusCode(200, "Se guardo la Skill correctamente");
-        }
-
-        [HttpDelete]
-        public ActionResult Eliminar(int Id)
-        {
-            try
-            {
-                this.logicaSkill.Eliminar(Id);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-
-            return StatusCode(200, "Se ELIMINO la Skill correctamente");
-        }
     }
 }

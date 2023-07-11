@@ -37,6 +37,9 @@ namespace Service
 
             services.AddScoped<ISkillRepositorio, SkillRepositorio>();
             services.AddScoped<ILogicaSkill, LogicaSkill>();
+
+            services.AddScoped<IProyectoRepositorio, ProyectoRepositorio>();
+            services.AddScoped<ILogicaProyecto, LogicaProyecto>();
         }
     }
 }

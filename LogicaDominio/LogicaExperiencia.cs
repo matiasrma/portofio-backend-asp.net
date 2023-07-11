@@ -20,14 +20,14 @@ namespace LogicaDominio
             return this.experienciaRepositorio.ObtenerLista(persona_id);
         }
 
-        public void Guardar(Experiencia experiencia)
+        public void Guardar(List<Experiencia> lista)
         {
-            this.experienciaRepositorio.Guardar(experiencia);
+            this.experienciaRepositorio.Guardar(lista);
         }
 
-        public void Eliminar(int id)
+        public void Eliminar(List<Experiencia> lista)
         {
-            this.experienciaRepositorio.Eliminar(id);
+            this.experienciaRepositorio.Eliminar(lista);
         }
     }
 }

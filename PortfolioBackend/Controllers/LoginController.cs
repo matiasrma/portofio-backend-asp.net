@@ -16,13 +16,11 @@ namespace PortfolioBackend.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string username, string password)
+        public ActionResult Login(Usuario usuario)
         {
-            Usuario usuario = new Usuario();
-
             try
             {
-                usuario = this.logicaUsuario.Login(username, password);
+                usuario = this.logicaUsuario.Login(usuario.nombre_usuario, usuario.password);
             }
             catch (Exception e)
             {

@@ -3,6 +3,7 @@ using Excepciones;
 using InterfazAccesoADatos;
 using MySqlConnector;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,7 +68,7 @@ namespace AccesoADatos.Repositorio
 
         }
 
-        public void Guardar(Experiencia experiencia)
+        public void Guardar(List<Experiencia> lista)
         {
             string cadena = "INSERT INTO experiencia (\n" +
                 "id, \n" +
@@ -76,14 +77,23 @@ namespace AccesoADatos.Repositorio
                 "nombre_exp, \n" +
                 "tiempo_exp, \n" +
                 "persona_id \n" +
-                ") VALUES (\n" +
-                "@id, \n" +
-                "@descripcion_exp, \n" +
-                "@img_exp, \n" +
-                "@nombre_exp, \n" +
-                "@tiempo_exp, \n" +
-                "@persona_id \n" +
-                ") ON DUPLICATE KEY UPDATE (\n" +
+                ") VALUES \n";
+
+            lista.ForEach(exp =>
+            {
+                cadena += "('" +
+                exp.Id + "', \n'" +
+                exp.descripcion_exp + "', \n'" +
+                exp.img_exp + "', \n'" +
+                exp.nombre_exp + "', \n'" +
+                exp.tiempo_exp + "', \n" +
+                "@persona_id), \n";
+            });
+
+            cadena = cadena.Substring(0, cadena.Length - 3);
+
+            cadena +=    
+                " ON DUPLICATE KEY UPDATE \n" +
                 "id = VALUES (id), \n" +
                 "descripcion_exp = VALUES (descripcion_exp), \n" +
                 "img_exp = VALUES (img_exp), \n" +
@@ -94,12 +104,7 @@ namespace AccesoADatos.Repositorio
             try
             {
                 MySqlCommand comando = new MySqlCommand(cadena, conexion);
-                comando.Parameters.Add("@id", MySqlDbType.Int32).Value = experiencia.Id;
-                comando.Parameters.Add("@descripcion_exp", MySqlDbType.String).Value = experiencia.descripcion_exp;
-                comando.Parameters.Add("@img_exp", MySqlDbType.Byte).Value = experiencia.img_exp;
-                comando.Parameters.Add("@nombre_exp", MySqlDbType.String).Value = experiencia.nombre_exp;
-                comando.Parameters.Add("@tiempo_exp", MySqlDbType.Int32).Value = experiencia.tiempo_exp;
-                comando.Parameters.Add("@persona_id", MySqlDbType.Int32).Value = experiencia.persona_id;
+                comando.Parameters.Add("@persona_id", MySqlDbType.Int32).Value = lista[0].persona_id;
                 comando.ExecuteNonQuery();
 
                 conexion.Close();
@@ -110,17 +115,24 @@ namespace AccesoADatos.Repositorio
                 conexion.Close();
                 throw new ExcepcionErrorDeSintaxisSQL(e.Message);
             }
-
         }
 
-        public void Eliminar(int Id)
+        public void Eliminar(List<Experiencia> lista)
         {
-            string cadena = "DELETE FROM experiencia WHERE id = @Id;";
+            string cadena = "DELETE FROM experiencia WHERE id IN ('";
+
+            lista.ForEach(exp =>
+            {
+                cadena += exp.Id + "', '";
+            });
+
+            cadena = cadena.Substring(0, cadena.Length-3) + ") ";
+            cadena += " AND persona_id = @persona_id";
 
             try
             {
-                MySqlCommand comando = new MySqlCommand(cadena, conexion);
-                comando.Parameters.Add("@id", MySqlDbType.Int32).Value = Id;
+                MySqlCommand comando = new MySqlCommand(cadena, conexion);                
+                comando.Parameters.Add("@persona_id", MySqlDbType.Int32).Value = lista[0].persona_id;
                 comando.ExecuteNonQuery();
                 conexion.Close();
 
