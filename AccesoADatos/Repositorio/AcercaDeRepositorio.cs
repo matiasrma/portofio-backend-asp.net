@@ -65,7 +65,7 @@ namespace AccesoADatos.Repositorio
                 ") VALUES (\n" +
                 "@id, \n" +
                 "@textoacd \n" +                
-                ") ON DUPLICATE KEY UPDATE (\n" +
+                ") ON DUPLICATE KEY UPDATE \n" +
                 "id = VALUES (id), \n" +
                 "textoacd = VALUES (textoacd);";
 

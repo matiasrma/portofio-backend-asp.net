@@ -50,8 +50,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
-app.UseAuthorization();
+
 
 app.UseCors(x => x
     .AllowAnyMethod()
@@ -59,6 +58,9 @@ app.UseCors(x => x
     .SetIsOriginAllowed(origin => true)
     .AllowCredentials()
     );
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

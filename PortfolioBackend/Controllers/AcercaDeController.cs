@@ -44,7 +44,7 @@ namespace PortfolioBackend.Controllers
                 return StatusCode(500, e.Message);
             }
 
-            return StatusCode(200, "Se guardo la red AcercaDe correctamente");
+            return StatusCode(200, JsonConvert.SerializeObject("Se guardo la información correctamente"));
         }
 
     }

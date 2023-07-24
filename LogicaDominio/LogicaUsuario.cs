@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using Excepciones;
 using ILogicaDominio;
 using InterfazAccesoADatos;
 using LogicaDominio.Common;
@@ -30,6 +31,9 @@ namespace LogicaDominio
             if(usuario.email != null)
             {
                 usuario.token = GetToken(usuario);
+            } else
+            {
+                throw new ExcepcionUsuarioPassword("Error de usuario o contraseña");
             }
 
             return usuario;

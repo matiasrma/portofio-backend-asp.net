@@ -26,7 +26,7 @@ namespace PortfolioBackend.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, e.Message);
+                return StatusCode(500, JsonConvert.SerializeObject(e.Message));
             }
 
             return StatusCode(200, JsonConvert.SerializeObject(lista));
