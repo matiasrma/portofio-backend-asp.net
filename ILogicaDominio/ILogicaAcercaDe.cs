@@ -2,9 +2,8 @@
 
 namespace ILogicaDominio
 {
-    public interface ILogicaAcercaDe
+    public interface ILogicaAcercaDe : ILogicaGet<AcercaDe>, ILogicaSave<AcercaDe>
     {
-        public AcercaDe Obtener(int id);
-        public void Guardar(AcercaDe acercaDe);        
+        
     }
 }

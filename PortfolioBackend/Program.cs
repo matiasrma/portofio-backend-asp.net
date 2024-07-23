@@ -37,12 +37,14 @@ builder.Services.AddAuthentication(d =>
     });
 
 // SERVICES DE TODOS LAS ENTIDADES
-string connectionString = builder.Configuration.GetConnectionString("PortfolioMySqlConnection");
+string connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
 builder.Services.AddTransient<MySqlConnection>(_ => new MySqlConnection(connectionString));
 
 var services = builder.Services;
 var serviceFactory = new ServiceFactory(services);
 serviceFactory.AddCustomServices();
+
+//builder.WebHost.UseUrls("https://*:5024");
 
 var app = builder.Build();
 
@@ -50,7 +52,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseCors(x => x
     .AllowAnyMethod()

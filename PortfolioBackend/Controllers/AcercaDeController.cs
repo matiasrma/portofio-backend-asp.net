@@ -18,16 +18,7 @@ namespace PortfolioBackend.Controllers
         [HttpGet]
         public ActionResult AcercaDe(int id)
         {
-            AcercaDe acercaDe = new AcercaDe();
-
-            try
-            {
-                acercaDe = this.logicaAcercaDe.Obtener(id);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
+            AcercaDe acercaDe = this.logicaAcercaDe.Obtener(id);
 
             return StatusCode(200, JsonConvert.SerializeObject(acercaDe));
         }
@@ -35,14 +26,7 @@ namespace PortfolioBackend.Controllers
         [HttpPost]
         public ActionResult Guardar(AcercaDe acercaDe)
         {
-            try
-            {
-                this.logicaAcercaDe.Guardar(acercaDe);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
+            this.logicaAcercaDe.Guardar(acercaDe);
 
             return StatusCode(200, JsonConvert.SerializeObject("Se guardo la información correctamente"));
         }

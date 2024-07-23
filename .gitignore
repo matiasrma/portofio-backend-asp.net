@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -397,3 +398,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 /PortfolioBackend/appsettings.json
+/PortfolioBackend/Dockerfile

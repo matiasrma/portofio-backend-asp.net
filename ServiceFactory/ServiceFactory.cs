@@ -40,6 +40,7 @@ namespace Service
 
             services.AddScoped<IProyectoRepositorio, ProyectoRepositorio>();
             services.AddScoped<ILogicaProyecto, LogicaProyecto>();
+                        
         }
     }
 }

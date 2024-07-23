@@ -1,10 +1,10 @@
 ﻿using Dominio;
+using ILogicaDominio;
 
 namespace InterfazAccesoADatos
 {
-    public interface IAcercaDeRepositorio
+    public interface IAcercaDeRepositorio : ILogicaGet<AcercaDe>, ILogicaSave<AcercaDe>
     {
-        public AcercaDe Obtener(int id);
-        public void Guardar(AcercaDe acercaDe);
+     
     }
 }
